@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>My List</title>
+    <style>
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f4f4f4;
+}
+.container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  background: #eee;
+  margin: 5px 0;
+  padding: 10px;
+  border-radius: 3px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.delete-btn {
+  background: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+</style>
+</head>
+<body>
+<div class = "container">
+<h1>My-To-Do-List</h1>
+<input type = "text" id = "myToDo" placeholder = "insert here">
+<button id = "myButton">Add</button>
+<ol id = "listItems"></ol>
+</div>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+  const addToDo = document.getElementById("myToDo");
+  const addButton = document.getElementById("myButton");
+  const addList = document.getElementById("listItems");
+
+  function createTask(taskText) {
+    const li = document.createElement("li");
+    li.textContent = taskText;
+
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete";
+    deleteButton.className = "delete-btn";
+    deleteButton.addEventListener("click", function () {
+      addList.removeChild(li);
+    });
+
+    const editButton = document.createElement("button");
+    editButton.textContent = "Edit";
+    editButton.className = "edit-btn";
+    editButton.addEventListener("click", function () {
+      const input = document.createElement("input");
+      input.type = "text";
+      input.value = li.firstChild.textContent;
+
+      const saveButton = document.createElement("button");
+      saveButton.textContent = "Save";
+
+      saveButton.addEventListener("click", function () {
+        li.firstChild.textContent = input.value;
+        li.removeChild(input);
+        li.removeChild(saveButton);
+      });
+
+      // Append input and save button for editing
+      li.appendChild(input);
+      li.appendChild(saveButton);
+    });
+
+    // Append delete and edit buttons to the task item
+    li.appendChild(editButton);
+    li.appendChild(deleteButton);
+
+    // Append the task item to the list
+    addList.appendChild(li);
+  }
+
+  // Add new task on button click
+  addButton.addEventListener("click", function () {
+    if (addToDo.value.trim() !== "") {
+      createTask(addToDo.value.trim());
+      addToDo.value = ""; // Clear the input field after adding
+    }
+  });
+});
+</script>
+</body>
+</html>
+
