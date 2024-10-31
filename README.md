@@ -52,7 +52,7 @@ Future Improvements
 Task Sorting: Add functionality to rearrange tasks by priority or due date.
 Persistent Storage: Store tasks in local storage so they remain after the page is reloaded.
 How to Run
-Simply open index.html in any modern web browser to use the to-do list application.
+Simply open testrun.html in any modern web browser to use the to-do list application.
 
 License
 This project is open-source. Feel free to use and modify it as you like.
